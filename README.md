@@ -4,6 +4,8 @@ Funcionalidades deste repositório:
 
 -> Api de busca de livros, criação e exclusão, alugar ou comprar. 
    -> Atualização da disponibilidade (alugado ou vendido)
+   -> DDD
+   -> Disponibilidade de acesso via GRPC.
    
 -> Suporte a docker.
 
@@ -16,5 +18,11 @@ Funcionalidades deste repositório:
 Vou adicionando aqui nos repositórios complementares com diversos meios de utilização.
 
 -> Repositório (decidir) controle de inserção, atualização via mensageria Exchanges RabbitMq.
+
+-> Repositório (decidir) Desg. Pattern de repositórios.
+
+-> Repositório (decidir) Desg. Pattern Factory and Strategy.
+
+-> Repositório (decidir) Minimal Api.
 
 -> Repositório (decidir) Controle de pre commit and pre push (Husky) e Processos de CI e CD.
