@@ -12,6 +12,7 @@ Funcionalidades deste repositório:
 -> Suporte a banco de dados de cache ou noSql (decidir)
 
 Vou adicionando aqui nos repositórios complementares com diversos meios de utilização.
+
 -> Repositório (decidir) controle de inserção, atualização via mensageria Exchanges RabbitMq.
 
 -> Repositório (decidir) Controle de pre commit and pre push (Husky) e Processos de CI e CD.
