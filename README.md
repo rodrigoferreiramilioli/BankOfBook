@@ -3,8 +3,11 @@ A proposta des repositório é criar uma api do zero ao docker, com bom banco de
 Funcionalidades deste repositório:
 
 -> Api de busca de livros, criação e exclusão, alugar ou comprar. 
+
    -> Atualização da disponibilidade (alugado ou vendido)
+   
    -> DDD
+   
    -> Disponibilidade de acesso via GRPC.
    
 -> Suporte a docker.
