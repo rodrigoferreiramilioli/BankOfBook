@@ -10,7 +10,7 @@ Funcionalidades deste repositório:
    
    -> Disponibilidade de acesso via GRPC.
    
--> Suporte a docker.
+-> Suporte a docker e docker-compose para subir o ambiente.
 
 -> Suporte a logs elasticSearch + Kibana
 
