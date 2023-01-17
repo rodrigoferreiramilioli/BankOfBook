@@ -9,7 +9,9 @@ Funcionalidades deste repositório:
 
 -> Suporte a logs elasticSearch + Kibana
 
--> Suporte a banco de dados de cache ou noSql (decidir)
+-> Suporte a banco de dados de cache ou noSql (decidir).
+
+-> Versionamento de API.
 
 Vou adicionando aqui nos repositórios complementares com diversos meios de utilização.
 
