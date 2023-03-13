@@ -10,5 +10,6 @@ namespace BankOfBook.Domain.Entities
     {
         public DateTime UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int Revision { get; set; }
     }
 }

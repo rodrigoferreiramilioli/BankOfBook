@@ -1,5 +1,8 @@
+using BankOfBook.Application;
+using BankOfBook.Infrastructure.Config;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Raven.Client.Documents;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +14,18 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bank of books", Version = "v1" });
 });
 
+builder.Host.AddRavenDB(
+    builder.Configuration["RavenDbConnect:Url"]!, builder.Configuration["RavenDbConnect:DataBase"]!
+);
+
 builder.Services.AddApiVersioning(o =>
 {
     o.ReportApiVersions = true;
     o.AssumeDefaultVersionWhenUnspecified = true;
     o.DefaultApiVersion = new ApiVersion(1, 0);
 });
+
+builder.Services.AddDependencies();
 
 builder.Services.AddVersionedApiExplorer(options =>
 { 
