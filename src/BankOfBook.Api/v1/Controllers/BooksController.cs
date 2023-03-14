@@ -1,4 +1,4 @@
-using ABCBrasil.VCF.Tofi.Purchase.UseCases.Mapping;
+using BankOfBook.Api.Mappers;
 using BankOfBook.Api.v1.Extensions;
 using BankOfBook.Api.v1.Model;
 using BankOfBook.Api.v1.Model.Page;
@@ -16,12 +16,15 @@ namespace BankOfBook.Api.v1.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
+        private readonly IBookService _bookService;
 
         public BooksController(
-            IBookRepository bookRepository, 
+            IBookRepository bookRepository,
+            IBookService bookService,
             IActionDescriptorCollectionProvider provider) : base(provider)
         {
             _bookRepository = bookRepository;
+            _bookService = bookService;
         }
 
         [HttpGet]
@@ -36,7 +39,7 @@ namespace BankOfBook.Api.v1.Controllers
         [ProducesResponseType(typeof(List<BookGetResponseModel>), 200)]
         public async Task<BookGetResponseModel> GetAsync([FromRoute] Guid id)
         {
-            var book = await _bookRepository.GetByIdAsync(id);
+            var book = await _bookRepository.GetByIdAsync(id.ToString());
             return this.CreateResponse(book?.ToResponseModel()!);
         }
 
@@ -44,11 +47,10 @@ namespace BankOfBook.Api.v1.Controllers
         [ProducesResponseType(typeof(BookCreateResquestModel), 200)]
         public async Task PostAsync([FromBody] BookCreateResquestModel bookCreateResquestModel)
         {
-            await _bookRepository.CreateAsync(bookCreateResquestModel.ToModel()!);
+            await _bookService.CreateAsync(bookCreateResquestModel.ToModel()!);
             this.CreateResponse(HttpStatusCode.OK);
         }
 
-        //Get Livros
         //Create Livros
         //Path and put livros
         //Delete livros

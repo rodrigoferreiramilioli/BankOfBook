@@ -1,6 +1,6 @@
 ﻿using BankOfBook.Domain.Entities;
 using BankOfBook.Domain.Interfaces;
-using BankOfBook.Domain.Page;
+using BankOfBook.Domain.Extensions;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
 
@@ -28,7 +28,7 @@ namespace BankOfBook.Infrastructure.Repository
                     .ToListAsync(), stats.TotalResults);
             }
         }
-        public async Task<Book> GetByIdAsync(Guid id)
+        public async Task<Book> GetByIdAsync(string id)
         {
             using var session = _documentStore.OpenAsyncSession();
 
@@ -41,7 +41,10 @@ namespace BankOfBook.Infrastructure.Repository
         {
             using var session = _documentStore.OpenAsyncSession();
 
-            var book = await session.Query<Book>().FirstOrDefaultAsync(q => q.Id == entity.Id);
+            var book = await session.Query<Book>().FirstOrDefaultAsync(
+                q => q.Name == entity.Name 
+                && q.Author == entity.Author
+                && q.Category == entity.Category);
 
             if (book == null)
             {
@@ -54,12 +57,11 @@ namespace BankOfBook.Infrastructure.Repository
                     KeyAutorization = Guid.NewGuid()
                 };
 
-                await session.StoreAsync(entity);
-                session.Advanced.Revisions.ForceRevisionCreationFor(entity, Raven.Client.Documents.Session.ForceRevisionStrategy.Before);
+                await session.StoreAsync(entity);                
                 await session.SaveChangesAsync();
             }
         }
-        public void Delete(Guid id)
+        public void Delete(string id)
         {
             using var session = _documentStore.OpenAsyncSession();
 

@@ -1,4 +1,4 @@
-﻿namespace BankOfBook.Domain.Page
+﻿namespace BankOfBook.Domain.Extensions
 {
     public class Pagination
     {

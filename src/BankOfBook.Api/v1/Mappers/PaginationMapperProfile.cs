@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using BankOfBook.Api.v1.Model.Page;
-using BankOfBook.Domain.Page;
+using BankOfBook.Domain.Extensions;
 
-namespace ABCBrasil.VCF.Tofi.Purchase.UseCases.Mapping;
+namespace BankOfBook.Api.Mappers;
 
 public class PaginationMapperProfile : Profile
 {

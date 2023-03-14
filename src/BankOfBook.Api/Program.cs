@@ -1,4 +1,5 @@
 using BankOfBook.Application;
+using BankOfBook.Domain.Extensions;
 using BankOfBook.Infrastructure.Config;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
@@ -51,6 +52,8 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     c.RoutePrefix = string.Empty;
 });
+
+app.UseExceptionGlobal();
 
 app.UseHttpsRedirection();
 

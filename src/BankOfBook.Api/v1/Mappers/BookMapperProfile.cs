@@ -2,7 +2,7 @@
 using BankOfBook.Api.v1.Model;
 using BankOfBook.Domain.Entities;
 
-namespace ABCBrasil.VCF.Tofi.Purchase.UseCases.Mapping;
+namespace BankOfBook.Api.Mappers;
 
 public class BookMapperProfile : Profile
 {
@@ -10,5 +10,8 @@ public class BookMapperProfile : Profile
     {
         CreateMap<Book, BookGetResponseModel>(MemberList.Destination)
             .ConstructUsing(src => new BookGetResponseModel());
+
+        CreateMap<BookCreateResquestModel, Book>(MemberList.Destination)
+            .ConstructUsing(src => new Book());
     }
 }

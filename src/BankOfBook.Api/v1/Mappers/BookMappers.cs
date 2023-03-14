@@ -2,7 +2,7 @@
 using BankOfBook.Api.v1.Model;
 using BankOfBook.Domain.Entities;
 
-namespace ABCBrasil.VCF.Tofi.Purchase.UseCases.Mapping;
+namespace BankOfBook.Api.Mappers;
 
 public static class BookMappers
 {

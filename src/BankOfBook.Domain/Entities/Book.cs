@@ -4,7 +4,12 @@ namespace BankOfBook.Domain.Entities
 {
     public class Book
     {
-        public Guid Id { get; set; }
+        public Book()
+        {
+            if(string.IsNullOrEmpty(Id))
+                Id = Guid.NewGuid().ToString();
+        }
+        public string? Id { get; set; }
         public string? Name { get; set; }
         public decimal PriceSale { get; set; }
         public decimal PriceRent { get; set; }
@@ -13,6 +18,7 @@ namespace BankOfBook.Domain.Entities
         public Status StatusLocalization { get; set; }
         public DateTime? RentDate { get; set; } // Quando estiver disponível,~será null
         public DateTime? RentReturnDate { get; set; } // Quando estiver disponível,~será null
+        public DateTime? SoldReturnDate { get; set; }
         public Audit? Audit { get; set; }
     }
 }

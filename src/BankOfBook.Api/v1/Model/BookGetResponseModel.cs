@@ -4,7 +4,7 @@ namespace BankOfBook.Api.v1.Model
 {
     public class BookGetResponseModel
     {
-        public Guid Id { get; set; }
+        public string? Id { get; set; }
         public string? Name { get; set; }
         public decimal PriceSale { get; set; }
         public decimal PriceRent { get; set; }
@@ -13,5 +13,6 @@ namespace BankOfBook.Api.v1.Model
         public Status StatusLocalization { get; set; }
         public DateTime? RentDate { get; set; }
         public DateTime? RentReturnDate { get; set; }
+        public DateTime? SoldReturnDate { get; set; }
     }
 }
