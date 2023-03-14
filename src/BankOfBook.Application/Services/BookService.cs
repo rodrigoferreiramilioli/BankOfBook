@@ -17,7 +17,6 @@ namespace BankOfBook.Application.Services
             CanValidatorEntity(book);
             book.StatusLocalization = Status.Available;
             await _bookRepository.CreateAsync(book);
-            
         }
         public void CanValidatorEntity(Book book)
         {
