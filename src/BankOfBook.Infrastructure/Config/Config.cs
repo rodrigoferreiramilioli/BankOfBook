@@ -1,18 +1,51 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Raven.Client.Documents;
+using Raven.Client.Documents.Operations;
+using Raven.Client.Exceptions;
+using Raven.Client.Exceptions.Database;
+using Raven.Client.ServerWide;
+using Raven.Client.ServerWide.Operations;
 
 namespace BankOfBook.Infrastructure.Config;
 internal static partial class Config
 {
     public static void RavenDB(
         IServiceCollection services,
-        string connectionString,
+        string connection,
         string database
     )
     {
-        var lazyDocumentStore = CreateDocument(connectionString, database);
-        DatabaseExists(lazyDocumentStore.Value);
-        CreateIndexes(lazyDocumentStore.Value);
-        services.TryAddSingleton(_ => lazyDocumentStore.Value);
+        var documentStore = CreateDocument(connection, database);
+        DatabaseExists(documentStore.Value);
+        services.TryAddSingleton(_ => documentStore.Value);
+    }
+    private static Lazy<IDocumentStore> CreateDocument(string connection, string database) =>
+    new(() =>
+    {
+        var connectionStore = new DocumentStore
+        {
+            Urls = new[] { connection },
+            Database = database
+        };
+        _ = connectionStore.Initialize();
+        return connectionStore;
+    });
+    private static void DatabaseExists(IDocumentStore store)
+    {
+        try
+        {
+            _ = store.Maintenance.ForDatabase(store.Database).Send(new GetStatisticsOperation());
+        }
+        catch (DatabaseDoesNotExistException)
+        {
+            try
+            {
+                _ = store.Maintenance.Server.Send(new CreateDatabaseOperation(new DatabaseRecord(store.Database)));
+            }
+            catch (ConcurrencyException msg) {
+                Console.WriteLine(msg);
+            }
+        }
     }
 }
